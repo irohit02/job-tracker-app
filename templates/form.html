@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="" method="POST">
+    <label>Company:</label><br>
+    <input type="text" name="company" value="{{ job[1] if job else '' }}" required><br><br>
+
+    <label>Position:</label><br>
+    <input type="text" name="position" value="{{ job[2] if job else '' }}" required><br><br>
+
+    <label>Status:</label><br>
+    <select name="status">
+        {% set selected = job[3] if job else '' %}
+        {% for option in ['Applied', 'Interview Scheduled', 'Offer Received', 'Rejected'] %}
+        <option value="{{ option }}" {% if option == selected %}selected{% endif %}>{{ option }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label>Notes:</label><br>
+    <textarea name="notes">{{ job[4] if job else '' }}</textarea><br><br>
+
+    <input type="submit" value="{% if job %}Update{% else %}Add Job{% endif %}">
+</form>
+{% endblock %}
