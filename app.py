@@ -226,7 +226,8 @@ def api_job(jid):
                    salary=j.salary, status=j.status, tags=j.tags, notes=j.notes,
                    date=j.date_applied.isoformat(),
                    remind=j.remind_on.isoformat() if j.remind_on else None,
-                   resume_url=url_for("uploads",filename=j.resume_file) if j.resume_file else None)
+                   resume_url = url_for("get_resume", filename=j.resume_file) if j.resume_file else None)
+
 
 @app.route("/api/analytics")
 def api_analytics():
