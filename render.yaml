@@ -1,13 +1,12 @@
 services:
   - type: web
     name: job-tracker
-    env: python
+    env: docker
     plan: free
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app"
+    repo: https://github.com/irohit02/job-tracker-app
+    branch: main
+    dockerfilePath: dockerfile
     envVars:
-      - key: FLASK_ENV
-        value: production
       - key: SECRET_KEY
         sync: false
       - key: DATABASE_URL
