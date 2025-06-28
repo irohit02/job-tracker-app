@@ -1,1 +1,12 @@
-Flask==2.2.2
+Flask==3.0.2
+Flask-SQLAlchemy==3.1.1
+Flask-Login==0.6.3
+Flask-Bcrypt==1.0.1
+Flask-Mail==0.9.1
+Flask-Dance==7.1.0
+APScheduler==3.10.4
+python-dotenv==1.0.1
+scikit-learn==1.5.0
+numpy>=1.26
+gunicorn==21.2.0
+psycopg2-binary==2.9.9    # only used with PostgreSQL

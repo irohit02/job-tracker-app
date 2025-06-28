@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-fluid px-3 px-md-5 mt-4">
+
+  <div class="row mb-4">
+    {% for label, value, color in [
+      ('Total', counts.total, 'secondary'),
+      ('Wishlist', counts.Wishlist, 'purple'),
+      ('Applied', counts.Applied, 'primary'),
+      ('Interview', counts.Interview, 'warning'),
+      ('Offer', counts.Offer, 'success'),
+      ('Rejected', counts.Rejected, 'danger')
+    ] %}
+    <div class="col-6 col-md-2 mb-3">
+      <div class="card glass-card p-3 h-100 d-flex flex-column justify-content-between">
+        <div class="card-body py-2">
+          <small class="text-muted">{{ label }}</small>
+          <h5 class="mb-0 text-{{ color }}">{{ value }}</h5>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <form class="row align-items-center mb-4" method="GET">
+    <div class="col-md-5 mb-2 mb-md-0">
+      <input type="text" name="q" class="form-control" placeholder="Search jobs…" value="{{ q }}">
+    </div>
+    <div class="col-md-4 mb-2 mb-md-0">
+      <select name="status" class="form-select">
+        <option value="">All Status</option>
+        {% for s in ['Wishlist','Applied','Interview','Offer','Rejected'] %}
+          <option value="{{ s }}" {% if s == statusF %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-3 text-end">
+      <button type="submit" class="btn btn-dark w-100"><i class="fas fa-filter me-1"></i> Filter</button>
+    </div>
+  </form>
+
+  {% if jobs %}
+  <div class="row">
+    {% for j in jobs %}
+    <div class="col-12 col-md-6 mb-3">
+      <div class="card border-0 shadow-sm p-3 h-100 d-flex flex-column justify-content-between">
+        <div>
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-1 fw-semibold">{{ j.role }}</h6>
+            <span class="badge bg-light text-dark border">{{ j.status }}</span>
+          </div>
+          <small class="text-muted">{{ j.company }} • {{ j.location or '—' }}</small>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <small class="text-muted">Applied: {{ j.date_applied }}</small>
+          <a href="{{ url_for('job_detail', jid=j.id) }}" class="btn btn-sm btn-outline-primary">Details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+    <div class="alert alert-info">No jobs found for your criteria.</div>
+  {% endif %}
+
+  <a href="{{ url_for('job_new') }}" class="fab" title="Add Job">
+    <i class="fas fa-plus"></i>
+  </a>
+</div>
+{% endblock %}
