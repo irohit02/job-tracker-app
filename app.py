@@ -278,9 +278,9 @@ def import_csv():
     return redirect(url_for("dashboard"))
 
 #CLI helper
-@app.cli.command("init-db")
-def init_db():
-    db.create_all(); print("Database initialized ✔")
+@app.before_first_request
+def initialize_database():
+    db.create_all()
 
 if __name__=="__main__":
     app.run(debug=True)
