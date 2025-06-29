@@ -11,7 +11,4 @@ class Config:
     UPLOAD_FOLDER = BASE_DIR / "static" / "uploads"
 
 class DevConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.getenv(
-        "DATABASE_URL",
-        f"sqlite:///{BASE_DIR/'instance'/'jobs.db'}"
-    )
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
