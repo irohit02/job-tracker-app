@@ -6,7 +6,7 @@ A modern job application tracking system built using **Flask**, designed to help
 
 ## Live Application
 
-👉 [Visit the App](https://job-tracker-app-4lnh.onrender.com)
+👉 [Link](https://job-tracker-app-4lnh.onrender.com)
 
 ---
 
